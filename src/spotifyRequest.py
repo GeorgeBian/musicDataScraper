@@ -10,7 +10,7 @@ class spotifyRequest:
         def __init__(self, client_id=r'01071569859f4de890de539ad1ca14ee', client_secret=r'02561150200d4071a743ab6e0d3d5db0'):
                 self.client_id = client_id
                 self.client_secret = client_secret
-        def request(self, fileName):
+        def request(self, tracklist_id, fileName):
                 #Authentication with oAuth2 to retreive token for API call
                 try:
                         auth = HTTPBasicAuth(self.client_id, self.client_secret)
@@ -23,7 +23,8 @@ class spotifyRequest:
 
                 #API call
                 else:
-                        endpoint = 'https://api.spotify.com/v1/playlists/37i9dQZF1DX387yApX7ZA5'
+
+                        endpoint = 'https://api.spotify.com/v1/playlists/{}'.format(tracklist_id)
                         headers = {"Authorization": "Bearer {}".format(token)}
                         response = requests.get(endpoint, headers=headers).json()
                         converter = jsonConverter(fileName)
