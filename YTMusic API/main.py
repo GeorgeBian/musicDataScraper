@@ -1,6 +1,7 @@
 from ytmusicapi import YTMusic
 import csv
 
+playlist = input("Welcome to YouTube Music Data Scraper. Please give me your playlist url: ").split('=')[-1]
 YTMusic.setup(filepath="headers_auth.json", headers_raw='''
 accept: */*
 accept-encoding: gzip, deflate, br
@@ -40,7 +41,7 @@ x-youtube-client-version: 1.20220525.01.00
 ''')
 ytmusic = YTMusic('headers_auth.json')
 #result = str(ytmusic.get_playlist(playlistId='RDCLAK5uy_mTDHYYJLCkFv8XL1Z8AFkMqF9RfQZzeRc')).replace('\'', '"')
-tracks = ytmusic.get_playlist(playlistId='RDCLAK5uy_nZiG9ehz_MQoWQxY5yElsLHCcG0tv9PRg')['tracks']
+tracks = ytmusic.get_playlist(playlistId=playlist)['tracks']
 result = []
 rank = 1
 for item in tracks:
